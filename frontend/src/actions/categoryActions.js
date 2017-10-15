@@ -1,6 +1,4 @@
-import {API, headers } from '../utils/api'
-
-
+import { fetchAllCategories } from '../utils/api'
 
 
 export const RECIEVE_CATEGORIES = 'RECIEVE_CATEGORIES'
@@ -11,9 +9,8 @@ export const recieveCategories = (data) => ({
 })
 
 
-export const categoriesAPI = () => dispatch => {
-  return fetch(`${API}/categories`, { headers })
-    .then(res => res.json())
-    .then(data => dispatch(recieveCategories(data)))
+export const getAllCategories = () => dispatch => {
+  	fetchAllCategories()
+  	.then(data => dispatch(recieveCategories(data)))
 }
 

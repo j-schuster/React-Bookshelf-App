@@ -5,7 +5,7 @@ export default class EditPost extends React.Component {
 		return(
 			<div>
 				<h1>You can edit a post here</h1>
-			</div>
+  			</div>
 		);
 	}
 }

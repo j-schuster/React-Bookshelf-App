@@ -10,6 +10,7 @@ import EditComment from './components/editComment'
 
 class App extends Component {
 
+
   render() {
     
     return (
@@ -17,7 +18,7 @@ class App extends Component {
          <Route exact path="/" render={() => (<MainPage/>)}/>
          <Route exact path="/:category" render={() => (<Post/>)}/> 
          <Route exact path="/posts/new" render={() => (<NewPost/>)}/>      
-         <Route exact path="/category/:id" render={() => (<PostInfo/>)}/>
+         <Route exact path="/posts/:id" render={() => (<PostInfo/>)}/>
          <Route exact path="/category/edit/:id" render={() => (<EditPost/>)}/>
          <Route exact path="/:category/:id/comments/new" render={() => (<PostComment/>)} />
          <Route exact path="/:category/:postId/comments/edit/:id" render={() => (<EditComment/>)}/>

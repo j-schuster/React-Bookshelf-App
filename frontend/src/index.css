@@ -4,15 +4,75 @@ body {
   font-family: sans-serif;
 }
 
+.navbar {
+	height: 10vh;
+	
+	border-radius: 0 !important;
+	background: #ff5151;
+	color: white;
+	text-align: center;
+}
+
 .categories {
 	width: 12%;
 	margin: 20px;
 	text-align: center;
-	padding: 5px;
-
+	border: 1px solid #898989;
+	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
 }
 
 .posts-main {
 	width: 60%;
 	margin: 0 auto;
+	text-align: center;
 }
+
+.post {
+	border: 1px solid #898989;
+	margin: 10px;
+	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
+}
+
+.list-group .list-group-item {
+	border: none;
+
+}
+
+.list-group .active {
+	margin: 0px;
+	background-color: #ff5151;
+	border-radius: 0 !important;
+}
+
+.details {
+	display: inline;
+	padding: 0;
+	margin: 50px;
+	text-transform: lowercase;
+
+}
+
+.details:nth-of-type(3) {
+	font-size: 25px;
+}
+
+.details:nth-of-type(7) {
+	font-size: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

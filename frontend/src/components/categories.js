@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { categoriesAPI } from '../actions/categoryActions'
-//import { getCategoryPosts } from '../actions/postActions'
+import { getAllCategories } from '../actions/categoryActions'
 
 
 class Categories extends React.Component {
@@ -10,14 +9,11 @@ class Categories extends React.Component {
 componentDidMount(){
 	this.props.getCategories()
 	}
-/*
-getCatPosts(category){
-	this.props.catPosts(category)
-}
-*/	
+	
 render() {
 	
 	const items = this.props.categories
+	
 	return(
 		<div>
 			<div className="list-group categories">
@@ -40,11 +36,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
- // catPosts: (category) => dispatch(getCategoryPosts(category)),
-  getCategories: () => dispatch(categoriesAPI())
+  getCategories: () => dispatch(getAllCategories())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories)
 
-//onClick={(e) => this.getCatPosts(item.name)}
+
 
