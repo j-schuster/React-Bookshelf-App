@@ -17,13 +17,13 @@ class PostInfo extends React.Component {
 	
 		return(
 			<div>
-				<div className="navbar"><h1>MAIN PAGE</h1></div>
+			<div className="navbar"><h1>Readable</h1></div>
 				{post !== undefined ? 
 					<div className="list-group posts-main">
   				{post.map((post) => 
   				 <div key={post.id} className="post">	
   				   <h3 className="list-group-item active">{post.title}</h3>
-  				   <p className="list-group-item">Author: {post.author}</p>
+  				    <p className="list-group-item"><i>By </i> {post.author} <i>On </i>{new Date(post.timestamp).toString().substr(0,16)}</p>
   				   <p className="list-group-item">{post.body}</p>
   				   <p className="list-group-item details"><UpIcon/></p>
   				   <p className="list-group-item details">{post.voteScore} votes</p>
@@ -40,8 +40,8 @@ class PostInfo extends React.Component {
   				   		<p className="list-group-item"></p>
   				   		<p className="list-group-item details"><UpIcon/></p>
   				   		<p className="list-group-item details">{comment.author}</p>
-  				   		<p className="list-group-item details">{comment.timestamp}</p>
-  				   		<p className="list-group-item details">{comment.voteScore}</p>
+  				   		<p className="list-group-item details">{new Date(comment.timestamp).toString().substr(0,16)}</p>
+  				   		<p className="list-group-item details">{comment.voteScore} votes</p>
   				   		<p className="list-group-item details"><DownIcon/></p>
   				   		<hr/>
   				   	</div>
@@ -72,4 +72,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostInfo)
+// {new Date(this.props.comment.timestamp).toString().substr(0,16)}
 
+//<div className="navbar"><h1>Readable</h1></div>

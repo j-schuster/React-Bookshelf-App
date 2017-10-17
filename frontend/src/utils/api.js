@@ -37,6 +37,29 @@ export const fetchPostDetails = (id) => {
     .then(data => data)
 }
 
+//============ POST REQUESTS ===========//
+
+// POST/posts
+export const addNewPost = (post) => {
+  return fetch(`${API}/posts`, {      // second arg = object that states method
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type' : 'application/json'  
+    },
+    body: JSON.stringify(post)
+  })
+  .then(data => data.json())
+}
+
+// POST /posts/:id
+
+// POST /comments
+
+// POST /comments/:id
+
+
+
 // COMMENTS
 export const fetchComments = (id) => {
   return fetch(`${API}/posts/${id}/comments`, { headers })

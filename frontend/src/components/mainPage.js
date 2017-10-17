@@ -1,9 +1,8 @@
 import React from 'react'
 import Categories from './categories'
 import { connect } from 'react-redux'
-import { getAllPosts } from '../actions/postActions'
-import UpIcon from 'react-icons/lib/go/arrow-up'
-import DownIcon from 'react-icons/lib/go/arrow-down'
+import { getAllPosts, addPost } from '../actions/postActions'
+import PostView from './postView'
 
 
 class MainPage extends React.Component {
@@ -17,45 +16,59 @@ class MainPage extends React.Component {
 	 return hey.map(x => x[postId].length)
 	}
 
-render() {
-const { comments, posts } = this.props
+	doSomething = () =>{
 
+		const info = {
+			id: '8ljvkhgvrvrvcsftffd',
+			title: "This is the last one for real",
+			body: 'this is aking forever, which is why I want to move on'
+		}
+
+		this.props.addNewPost(info)
+		this.props.allPosts()
+	}
+	
+
+render() {
+	
 	return(
 		<div>
-			<div className="navbar"><h1>MAIN PAGE</h1></div>
+			<div className="navbar"><h1>Readable</h1></div>
 			<Categories/>
-			<div className="list-group posts-main">
-  				{posts.map((post) => 
-  				 <div key={post.id} className="post">	
-  				   <h3 className="list-group-item active">{post.title}</h3>
-  				   <p className="list-group-item">Author: {post.author}</p>
-  				   <p className="list-group-item">{post.body}</p>
-  				   <p className="list-group-item details"><UpIcon/></p>
-  				   <p className="list-group-item details">{post.voteScore} votes</p>
-  				   <p className="list-group-item details">{this.getComments(post.id, comments)}  comments</p>
-  				   <p className="list-group-item details">{post.category}</p>
-  				   <p className="list-group-item details"><DownIcon/></p>
-  				 </div>  
-  				)}
-			</div>
+			<PostView posts={this.props.posts} comments={this.props.comments}/>
+			<button onClick={this.doSomething}>SEND</button>
 		</div>
 		);	
 	}
 } 
 
 const mapStateToProps = state => {
-	const { comments } = state
-
+	const { comments, posts } = state
 	return {
-		posts : state.posts,
+		posts : posts,
 		comments : [comments]
 	}
 }
 
 const mapDispatchToProps = dispatch => ({
-  allPosts: () => dispatch(getAllPosts())
+  allPosts: () => dispatch(getAllPosts()),
+  addNewPost: (info) => dispatch(addPost(info))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
-// {this.getComments(post.id, comments)} 
-// {new Date(this.props.comment.timestamp).toString().substr(0,16)}
+
+/*
+
+	doSomething(){
+
+		const info = {
+			id: '8848484848',
+			title: "I love peanut-butter",
+			body: 'this is the bod of my new post'
+		}
+
+		this.props.addNewPost(info)
+	}
+
+	<div className="navbar"><h1>Readable</h1></div>
+*/
