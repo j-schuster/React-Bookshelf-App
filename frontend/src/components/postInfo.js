@@ -2,19 +2,37 @@ import React from 'react'
 import { connect } from 'react-redux'
 import UpIcon from 'react-icons/lib/go/arrow-up'
 import DownIcon from 'react-icons/lib/go/arrow-down'
-import { getPostDetails } from '../actions/postActions'
+import { getPostDetails, removePost } from '../actions/postActions'
+import { Redirect } from 'react-router-dom'
 
 class PostInfo extends React.Component {
+
+  constructor(){
+    super();
+    this.state = {
+      redirect: false
+    }
+  }
 
 	componentDidMount(){
 		const id = window.location.pathname
 		this.props.loadPostInfo(id)
 	}
 
+  handleClick = (id) => {
+    this.props.deletePost(id)
+    this.setState({ redirect: true })
+
+  }
+
 	render() {
+    const { redirect } = this.state
 		const post = this.props.postDetails
 		const comments = this.props.postComments
 	
+    if(redirect){
+       return <Redirect to='/'/>
+    }
 		return(
 			<div>
 			<div className="navbar"><h1>Readable</h1></div>
@@ -30,6 +48,7 @@ class PostInfo extends React.Component {
   				   <p className="list-group-item details"></p>
   				   <p className="list-group-item details">{post.category}</p>
   				   <p className="list-group-item details"><DownIcon/></p>
+             <button onClick={() => this.handleClick(post.id)}>Delete Post</button>
   				   <hr/>
   				   <div className="comments-section">
   				  <h6>COMMENTS</h6>
@@ -49,7 +68,7 @@ class PostInfo extends React.Component {
   				   </div>
   				 </div>  
   				)}
-
+          
 			</div>	
 			 : 
 			<h1>CHILL</h1>
@@ -68,10 +87,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-	loadPostInfo: (id) => dispatch(getPostDetails(id))
+	loadPostInfo: (id) => dispatch(getPostDetails(id)),
+  deletePost: (id) => dispatch(removePost(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostInfo)
-// {new Date(this.props.comment.timestamp).toString().substr(0,16)}
 
-//<div className="navbar"><h1>Readable</h1></div>

@@ -1,8 +1,10 @@
 import React from 'react'
 import Categories from './categories'
 import { connect } from 'react-redux'
-import { getAllPosts, addPost } from '../actions/postActions'
+import { Link } from 'react-router-dom'
+import { getAllPosts } from '../actions/postActions'
 import PostView from './postView'
+import AddIcon from 'react-icons/lib/fa/plus-circle'
 
 
 class MainPage extends React.Component {
@@ -13,30 +15,21 @@ class MainPage extends React.Component {
 
 	 getComments(postId, comments){
 	   const hey = comments.filter((comment) => comment[postId])
-	 return hey.map(x => x[postId].length)
-	}
-
-	doSomething = () =>{
-
-		const info = {
-			id: '8ljvkhgvrvrvcsftffd',
-			title: "This is the last one for real",
-			body: 'this is aking forever, which is why I want to move on'
-		}
-
-		this.props.addNewPost(info)
-		this.props.allPosts()
+	 	return hey.map(x => x[postId].length)
 	}
 	
 
 render() {
 	
+	
 	return(
 		<div>
 			<div className="navbar"><h1>Readable</h1></div>
 			<Categories/>
-			<PostView posts={this.props.posts} comments={this.props.comments}/>
-			<button onClick={this.doSomething}>SEND</button>
+			 <PostView posts={this.props.posts} comments={this.props.comments}/>			
+			<Link to='/new/post'>
+			 <div className="add-icon"><AddIcon/></div>
+			 </Link>
 		</div>
 		);	
 	}
@@ -44,6 +37,7 @@ render() {
 
 const mapStateToProps = state => {
 	const { comments, posts } = state
+	
 	return {
 		posts : posts,
 		comments : [comments]
@@ -51,8 +45,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  allPosts: () => dispatch(getAllPosts()),
-  addNewPost: (info) => dispatch(addPost(info))
+  allPosts: () => dispatch(getAllPosts())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage)

@@ -1,4 +1,9 @@
-import { fetchAllPosts, fetchCategoryPosts, fetchPostDetails, fetchComments, addNewPost } from '../utils/api'
+import { fetchAllPosts,
+ fetchCategoryPosts,
+  fetchPostDetails,
+   fetchComments,
+    addNewPost,
+    deletePost } from '../utils/api'
 
 
 export const RECIEVE_POSTS = 'RECIEVE_POSTS'
@@ -6,6 +11,7 @@ export const RECIEVE_CATEGORY_POSTS = 'RECIEVE_CATEGORY_POSTS'
 export const RECIEVE_POST_DETAILS = 'RECIEVE_POST_DETAILS'
 export const RECIEVE_COMMENTS = 'RECIEVE_COMMENTS'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
+export const DELETE_POST = 'DELETE_POST'
 //change allPosts to posts
 export const recieveAllPosts = (posts, postId) => ({
 	type: RECIEVE_POSTS,
@@ -73,25 +79,15 @@ export const getPostDetails = (id) => dispatch => {
 }
 
 
-
-/*
-dispatch(recieveComments(data))
-{
-export const getAllPosts = () => dispatch => {
-  fetchAllPosts()
-  .then(data => data.map(post => {
-    fetchComments(post.id)
-    .then(comments => {
-        dispatch({
-        type: RECIEVE_POSTS,
-        data,
-        comments
-      })
+export const removePost = (id) => dispatch => {
+  deletePost(id)
+  .then(() => {
+    dispatch({
+      type: DELETE_POST,
+      id
     })
-  }))
+  })
 }
-*/
-
 
 
 

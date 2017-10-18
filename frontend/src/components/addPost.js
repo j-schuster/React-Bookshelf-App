@@ -1,20 +1,23 @@
 import React from 'react'
+import { addPost } from '../actions/postActions'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+
 
 class AddPost extends React.Component {
 
 	constructor(props){
 		super(props);
 		this.state = {	
-				id: '',
-		 timestamp: '',
-		 	 title: '',
-			  body: '',
-		    author: '',
-		  category: '',
-		 votescore: 0,
-		   deleted: false	
+		 	 postTitle: '',
+			  postBody: '',
+		    postAuthor: '',
+		  postCategory: '',
+		      redirect: false,
+		        linkId: ''
 		}
 	}
+
 
 	handleChange = (event) => {
 		this.setState({		
@@ -22,63 +25,91 @@ class AddPost extends React.Component {
 		})
 	}
 
-	assignTimeAndId = (e) => {
+	handleSubmit = e => {
 
-		var uniqueId = () =>  Math.random().toString(36).substr(2, 16);		
-		this.setState({ timestamp: Math.floor(Date.now() / 1000) })
-		this.setState({ id: uniqueId() })
 		e.preventDefault()
 
-		const newPost = this.state	
-		console.log(newPost)
+		let uniqueId = () =>  Math.random().toString(36).substr(2, 16)
+
+			const post = {
+				id:  uniqueId(),
+		 timestamp: Date.now(),
+		 	 title: this.state.postTitle,
+			  body: this.state.postBody,
+		    author: this.state.postAuthor,
+		  category: this.state.postCategory,
+		 votescore: 0,
+		   deleted: false
+			}
+			
+			this.props.addNewPost(post)
+			this.setState({ linkId: post.id })
+			this.setState({ redirect: true })
+			
 	}
+
 	
 	render() {
-		
+		const { redirect, linkId } = this.state
+
+		if (redirect) {
+       		return <Redirect to={`/posts/${linkId}`}/>
+     	}
 		return(
 		<div className="add-post">
 			<div className="navbar"><h1>Readable</h1></div>
-			   <form onSubmit={this.assignTimeAndId}>	
+			   <form onSubmit={this.handleSubmit}>	
 				  <div className="form">	
 				     <h1>Add New Post</h1>			
 				        <div className="form-group">
-						<input className="form-control" 
-							   name="title"	
-							   type="text"
-							   placeholder="Title" 
-							   value={this.state.title} 
-							   onChange={this.handleChange}/>
+							<input className="form-control" 
+								   name="postTitle"	
+								   type="text"
+								   placeholder="Title" 
+								   value={this.state.title} 
+								   onChange={this.handleChange}/>
 					 	</div>	
 					    <div className="form-group">	
 				        <textarea type="text" 
-				        		  name="body"	
+				        		  name="postBody"	
 				        		  className="form-control" 
 				        		  placeholder="Body"
 				        		  value={this.state.body}
 				        		  onChange={this.handleChange}/>
 					    </div>
 					    <select className="form-control"
-					    		name="category"  
-					    		onChange={this.handleChange}>
+					    		  name="postCategory"  
+					    		  onChange={this.handleChange}>
+					      <option value="select" disabled>Select category...</option>		
 					   	  <option value="react">React</option>
 					   	  <option value="redux">Redux</option>
 					   	  <option value="udacity">Udacity</option>
 					    </select>				    
-					   <div className="form-group">	
-					   <input type="text"
-					   		  name="author" 
-					   		  className="form-control" 
-					   		  placeholder="Name"
-					   		  value={this.state.author}
-					   		  onChange={this.handleChange}/>
-
-		     	    </div>	
-	     		  <button type="submit" value="submit" className="btn11">ADD!</button>
+					    <div className="form-group">	
+					       <input type="text"
+						   		  name="postAuthor" 
+						   		  className="form-control" 
+						   		  placeholder="Name"
+						   		  value={this.state.author}
+						   		  onChange={this.handleChange}/>
+		     	   	 </div>		     	
+	     		  <input type="submit" value="submit" className="btn" />  		     		
 			    </div>
 			  </form>
 		    </div>
 		);
 	}
+
 }
 
-export default AddPost
+const mapDispatchToProps = dispatch => ({
+  addNewPost: (info) => dispatch(addPost(info))
+});
+
+export default connect(null, mapDispatchToProps)(AddPost)
+
+
+
+
+
+

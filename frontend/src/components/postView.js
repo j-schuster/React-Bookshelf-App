@@ -14,7 +14,7 @@ class PostView extends React.Component {
 
 render() {
 	const { comments, posts } = this.props
-	
+
 	return(
 		<div>
 			<div className="list-group posts-main">

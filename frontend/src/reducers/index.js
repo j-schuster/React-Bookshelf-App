@@ -4,18 +4,19 @@ import { RECIEVE_POSTS,
 		 RECIEVE_CATEGORY_POSTS,
 		 RECIEVE_POST_DETAILS,
 		 RECIEVE_COMMENTS,
-		 ADD_NEW_POST
+		 ADD_NEW_POST,
+		 DELETE_POST
 		 } from '../actions/postActions'
 
 
 function categories(state=[], action) {
 	switch(action.type){
-			case RECIEVE_CATEGORIES :
-			const categories = action.data.categories.map((cat) => cat)
-      			return categories
-      		default :
-      			return state	
-		} 
+		case RECIEVE_CATEGORIES:
+		const categories = action.data.categories.map((cat) => cat)
+     		return categories
+      	default:
+      		return state	
+	} 
 }
 
 function posts(state=[], action) {
@@ -24,29 +25,21 @@ function posts(state=[], action) {
 		const posts = action.posts
 			return posts
 		case ADD_NEW_POST:
-		console.log(action)
 			return [...state, action.post]
-		default :
+		case DELETE_POST:
+			return [...state]	
+		default:
 			return state
 	}
 }
-/*
-function newPosts(state=[], action) {
-	switch(action.type){
-		case ADD_NEW_POST:
-		return action.newPost
-		default :
-			return state
-	}
-}
-*/
+
 function categoryPosts(state=[], action) {
 	switch(action.type){
 		case RECIEVE_CATEGORY_POSTS:
 		const categoryPosts = action.categoryPosts
 			return categoryPosts	
-			default :
-				return state
+		default:
+			return state
 	}
 }
 
@@ -77,6 +70,8 @@ function comments(state={}, action) {
 			return state
 	}
 }
+
+
 
 
 const rootReducer = combineReducers({

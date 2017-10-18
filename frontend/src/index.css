@@ -8,7 +8,7 @@ body {
 	height: 10vh;
 	
 	border-radius: 0 !important;
-	background: #ff5151;
+	background: #34495e;
 	color: white;
 	text-align: center;
 }
@@ -40,7 +40,7 @@ body {
 
 .list-group .active {
 	margin: 0px;
-	background-color: #ff5151;
+	background-color: #34495e;
 	border-radius: 0 !important;
 }
 
@@ -84,8 +84,19 @@ button {
 	border-radius: 0 !important;
 }
 
+.add-icon {
+	float: right;
+	margin: 50px;
+	font-size: 40px;
+	color: #ff2d2d;
+}
 
-
+.back-icon {
+	display: inline;
+	float: left;
+	font-size: 30px;
+	margin: 15px 0 0 5px;
+}
 
 
 

@@ -59,6 +59,15 @@ export const addNewPost = (post) => {
 // POST /comments/:id
 
 
+// ==================== DELETE ====================//
+
+// delete post 
+export const deletePost = (id) => {
+return fetch( `${API}/posts/${id}`, {
+  method: 'DELETE',
+  headers
+  })
+}
 
 // COMMENTS
 export const fetchComments = (id) => {
