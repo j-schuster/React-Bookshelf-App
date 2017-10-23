@@ -5,7 +5,10 @@ import { RECIEVE_POSTS,
 		 RECIEVE_POST_DETAILS,
 		 RECIEVE_COMMENTS,
 		 ADD_NEW_POST,
-		 DELETE_POST
+		 DELETE_POST,
+		 ADD_NEW_COMMENT,
+		 DELETE_COMMENT,
+		 EDIT_POST
 		 } from '../actions/postActions'
 
 
@@ -27,7 +30,7 @@ function posts(state=[], action) {
 		case ADD_NEW_POST:
 			return [...state, action.post]
 		case DELETE_POST:
-			return [...state]	
+			return [...state]
 		default:
 			return state
 	}
@@ -46,17 +49,37 @@ function categoryPosts(state=[], action) {
 function postDetails(state=[], action) {
 	switch(action.type){
 		case RECIEVE_POST_DETAILS:
-			const postDetails = action.post
-			const comments = action.comments
+		const postDetails = action.post
+		const comments = action.comments
 			return {
 				...state,
 				post:[postDetails], 
 				comments:comments
 			}
+		case ADD_NEW_COMMENT:
+			return {
+				...state,
+				comments:[...state.comments, action.comment]
+			}
+		case DELETE_COMMENT:
+		const target = state.comments.findIndex((comment) => comment.id === action.id)
+			return {
+				...state,
+				comments: [
+					...state.comments.slice(0, target),
+					...state.comments.slice(target + 1)
+					] 
+			}
+		case EDIT_POST:
+			return {
+				...state, 
+				post: [action.post]
+			}		
 				default:
 					return state
 	}
 }
+
 
 function comments(state={}, action) {
 	switch(action.type){
@@ -64,7 +87,7 @@ function comments(state={}, action) {
 		 const { comments, postId } = action
 			return  {...state, 
 				[postId]: comments
-			}
+			}	
 
 		default :
 			return state

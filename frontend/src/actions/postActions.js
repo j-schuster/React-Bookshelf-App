@@ -3,7 +3,10 @@ import { fetchAllPosts,
   fetchPostDetails,
    fetchComments,
     addNewPost,
-    deletePost } from '../utils/api'
+    deletePost,
+    addComment,
+    deleteComment,
+    editPost } from '../utils/api'
 
 
 export const RECIEVE_POSTS = 'RECIEVE_POSTS'
@@ -12,6 +15,11 @@ export const RECIEVE_POST_DETAILS = 'RECIEVE_POST_DETAILS'
 export const RECIEVE_COMMENTS = 'RECIEVE_COMMENTS'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const EDIT_POST = 'EDIT_POST'
+
+
 //change allPosts to posts
 export const recieveAllPosts = (posts, postId) => ({
 	type: RECIEVE_POSTS,
@@ -59,6 +67,25 @@ export const addPost = (post) => dispatch => {
 }
 
 // COMMENTS
+export const addNewComment = (comment) => dispatch => {
+  addComment(comment)
+  .then(newComment => dispatch({
+    type: ADD_NEW_COMMENT,
+    comment
+  }))
+}
+
+// delete comments 
+export const removeComment = (id) => dispatch => {
+  deleteComment(id)
+  .then(() => {
+    dispatch({
+     type: DELETE_COMMENT,
+     id
+   })
+ })
+}
+
 export const getComments = (id) => dispatch => {
    fetchComments(id)
    .then(data => dispatch(recieveComments(data, id)))
@@ -89,7 +116,16 @@ export const removePost = (id) => dispatch => {
   })
 }
 
-
+export const modifyPost = (id, post) => dispatch => {
+  editPost(id, post)
+  .then(() => {
+    dispatch({
+      type: EDIT_POST,
+      id,
+      post
+    })
+  })
+}
 
 
 

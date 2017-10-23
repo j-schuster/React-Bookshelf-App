@@ -82,6 +82,7 @@ textarea {
 button {
 	float: left;
 	border-radius: 0 !important;
+	margin-left: 20px;
 }
 
 .add-icon {
@@ -98,8 +99,43 @@ button {
 	margin: 15px 0 0 5px;
 }
 
+ .Modal {
+ 	position: relative;
+ /*   top: 250px;
+    left: 150px;
+    right: 150px;
+    bottom: 250px; */
+    height: 300px;
+    width: 70%;
+    margin: 250px auto;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
+  }
 
+  .Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+ }
 
+.add-comment-form {
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 80px;
+}
+
+.add-comment-btn {
+	display: inline;
+}
+
+.comments-header {
+	display: inline;
+	margin-right: 130px;
+}
 
 
 
