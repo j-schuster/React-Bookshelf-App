@@ -46,14 +46,13 @@ function categoryPosts(state=[], action) {
 	}
 }
 
-function postDetails(state=[], action) {
+function postDetails(state={}, action) {
 	switch(action.type){
 		case RECIEVE_POST_DETAILS:
-		const postDetails = action.post
-		const comments = action.comments
+		const { post, comments } = action
 			return {
 				...state,
-				post:[postDetails], 
+				post:[post], 
 				comments:comments
 			}
 		case ADD_NEW_COMMENT:
@@ -71,12 +70,13 @@ function postDetails(state=[], action) {
 					] 
 			}
 		case EDIT_POST:
+		const editedPost = Object.assign(state.post[0], action.post)		
 			return {
 				...state, 
-				post: [action.post]
+				post: [editedPost]
 			}		
-				default:
-					return state
+		default:
+			return state
 	}
 }
 
@@ -103,7 +103,6 @@ const rootReducer = combineReducers({
 	categoryPosts,
 	postDetails,
 	comments,
-	//newPosts
 })
 
 export default rootReducer

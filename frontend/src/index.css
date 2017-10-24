@@ -51,7 +51,7 @@ body {
 	text-transform: lowercase;
 
 }
-
+/*
 .details:nth-of-type(3) {
 	font-size: 25px;
 }
@@ -59,7 +59,7 @@ body {
 .details:nth-of-type(7) {
 	font-size: 25px;
 }
-
+*/
 .add-post {
 	text-align: center;
 }
@@ -134,8 +134,42 @@ button {
 
 .comments-header {
 	display: inline;
-	margin-right: 130px;
+	margin: 0 auto;
+	margin-left: -35px;
 }
+
+.post-icon {
+	font-size: 20px;
+	margin: 15px;
+}
+
+.post-icon:hover {
+	color: red;
+}
+
+.com-auth {
+	margin-left: -500px;
+}
+
+.vote-icon {
+	font-size: 25px;
+}
+
+.com-icon:hover {
+	color: lightblue;
+
+}
+
+.com-icon {
+	font-size: 25px;
+	float: left;
+	margin-left: 15px;
+}
+
+
+
+
+
 
 
 

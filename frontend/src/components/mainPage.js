@@ -20,8 +20,7 @@ class MainPage extends React.Component {
 	
 
 render() {
-	
-	
+		
 	return(
 		<div>
 			<div className="navbar"><h1>Readable</h1></div>
@@ -49,19 +48,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
-
-/*
-
-	doSomething(){
-
-		const info = {
-			id: '8848484848',
-			title: "I love peanut-butter",
-			body: 'this is the bod of my new post'
-		}
-
-		this.props.addNewPost(info)
-	}
-
-	<div className="navbar"><h1>Readable</h1></div>
-*/
