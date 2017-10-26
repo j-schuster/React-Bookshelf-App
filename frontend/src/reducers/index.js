@@ -8,7 +8,9 @@ import { RECIEVE_POSTS,
 		 DELETE_POST,
 		 ADD_NEW_COMMENT,
 		 DELETE_COMMENT,
-		 EDIT_POST
+		 EDIT_POST,
+		 EDIT_COMMENT,
+		 UP_VOTE
 		 } from '../actions/postActions'
 
 
@@ -22,7 +24,7 @@ function categories(state=[], action) {
 	} 
 }
 
-function posts(state=[], action) {
+function posts(state = [], action) {
 	switch(action.type){
 		case RECIEVE_POSTS:
 		const posts = action.posts
@@ -31,6 +33,14 @@ function posts(state=[], action) {
 			return [...state, action.post]
 		case DELETE_POST:
 			return [...state]
+		case UP_VOTE:
+		
+		const postsAll = [...state]
+		
+		const target = postsAll.findIndex(post => post.id === action.id)
+		postsAll[target].voteScore = postsAll[target].voteScore + 1
+		
+			return [...postsAll]	
 		default:
 			return state
 	}
@@ -74,7 +84,19 @@ function postDetails(state={}, action) {
 			return {
 				...state, 
 				post: [editedPost]
-			}		
+			}
+		case EDIT_COMMENT:
+
+		const commentList = [...state.comments]
+		const targetComment = commentList.findIndex(comment => comment.id === action.id)
+		const editedComment = Object.assign({}, commentList[targetComment], action.comment)
+			
+			return {
+				...state,
+				comments: [...commentList.slice(0, targetComment), editedComment,
+						   ...commentList.slice(targetComment + 1)
+						]
+			}			
 		default:
 			return state
 	}

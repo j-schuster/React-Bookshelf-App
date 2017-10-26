@@ -12,7 +12,8 @@ import { getPostDetails,
          removePost,
          addNewComment, 
          removeComment, 
-         modifyPost } from '../actions/postActions'
+         modifyPost,
+         modifyComment } from '../actions/postActions'
 
 
 
@@ -21,11 +22,14 @@ class PostInfo extends React.Component {
   constructor(){
     super();
     this.state = {
-      redirect: false,
-      commentModal: false,
+      commentId: '',
       commentBody: '',
       commentAuthor: '',
+      redirect: false,
+      commentModal: false,
       editPostModal: false,
+      editCommentModal: false
+      
     }
   }
 
@@ -40,8 +44,11 @@ class PostInfo extends React.Component {
 
   }
 
-  handleModal = (name) => { 
+  handleModal = (name, body, author, id) => { 
     this.setState({ [name]: true })
+    this.setState({ commentId: id })
+    this.setState({ commentBody: body })
+    this.setState({ commentAuthor: author })
   }
 
 
@@ -58,7 +65,10 @@ class PostInfo extends React.Component {
         author: this.state.commentAuthor,
         voteScore: 0,
         deleted: false,
-        parentDeleted: false
+        parentDeleted: false,
+        commentBody: '',
+        commentAuthor: ''
+
       }
 
     this.props.addComment(comment)
@@ -75,7 +85,7 @@ class PostInfo extends React.Component {
   }
 
   handleSubmit = (id, e) => {
-    e.preventDefault();
+    e.preventDefault()
     const title = this.title.value
     const body = this.body.value
      
@@ -88,8 +98,23 @@ class PostInfo extends React.Component {
     this.setState({ editPostModal: false })
   }
 
+  handleEditComment = (e) => {
+    e.preventDefault()
+
+    const id = this.state.commentId
+
+    const comment = {
+      body: this.state.commentBody,
+      author: this.state.commentAuthor,
+      timestamp: Date.now()
+    }
+
+    this.props.editComment(id, comment)
+    this.setState({ editCommentModal: false })
+  }
+
 	render() {
-    
+
     const { redirect } = this.state
 		const post = this.props.postDetails
 		const comments = this.props.postComments
@@ -195,9 +220,40 @@ class PostInfo extends React.Component {
                              <p className="list-group-item details">{comment.voteScore} votes</p>
                              <p className="list-group-item details vote-icon"><DownIcon/></p>
                           <div>
-                        <EditIcon className="post-icon"/> 
+                        <EditIcon className="post-icon" onClick={() => this.handleModal('editCommentModal', comment.body, comment.author, comment.id)}/> 
                         <TrashCan className="post-icon" onClick={() => this.deleteComment(comment.id)}/>
                         
+                      <ReactModal 
+                        isOpen={this.state.editCommentModal}    
+                        className="Modal"
+                        overlayClassName="Overlay"
+                        >
+
+                      <form onSubmit={(e) => this.handleEditComment(e)}
+                            className="add-comment-form">
+                           <div className="form-group">
+                           <input className="form-control"
+                                     onChange={this.handleChange}
+                                     type="text" 
+                                     value={this.state.commentBody}
+                                     name="commentBody"
+                                     >
+                           </input>
+                           </div>
+                           <div className="form-group">  
+                           <textarea className="form-control" 
+                                  onChange={this.handleChange}
+                                  type="text" 
+                                  value={this.state.commentAuthor}
+                                  name="commentAuthor"
+                                  >                          
+                           </textarea>
+                           </div>
+                           <button type="submit" className="add-comment btn">Submit!</button>
+                      </form>               
+                      </ReactModal>
+
+
                        </div>
                       <hr/>
                      </div>
@@ -227,7 +283,8 @@ const mapDispatchToProps = dispatch => ({
   deletePost: (id) => dispatch(removePost(id)),
   addComment: (comment) => dispatch(addNewComment(comment)),
   removeComment: (id) => dispatch(removeComment(id)),
-  editPost: (id, post) => dispatch(modifyPost(id, post))
+  editPost: (id, post) => dispatch(modifyPost(id, post)),
+  editComment: (id, comment) => dispatch(modifyComment(id, comment))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostInfo)

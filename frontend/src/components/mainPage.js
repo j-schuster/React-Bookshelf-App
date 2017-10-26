@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getAllPosts } from '../actions/postActions'
 import PostView from './postView'
-import AddIcon from 'react-icons/lib/fa/plus-circle'
+import AddIcon from 'react-icons/lib/md/add-circle'
 
 
 class MainPage extends React.Component {
@@ -37,6 +37,7 @@ render() {
 const mapStateToProps = state => {
 	const { comments, posts } = state
 	
+
 	return {
 		posts : posts,
 		comments : [comments]

@@ -88,8 +88,12 @@ button {
 .add-icon {
 	float: right;
 	margin: 50px;
-	font-size: 40px;
-	color: #ff2d2d;
+	font-size: 45px;
+	color: #34495e;
+	height: 45px;
+	line-height: 2px;
+	border-radius: 22px;
+	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
 }
 
 .back-icon {

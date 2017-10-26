@@ -6,7 +6,9 @@ import { fetchAllPosts,
     deletePost,
     addComment,
     deleteComment,
-    editPost } from '../utils/api'
+    editPost,
+    editComment,
+    votePost } from '../utils/api'
 
 
 export const RECIEVE_POSTS = 'RECIEVE_POSTS'
@@ -18,7 +20,8 @@ export const DELETE_POST = 'DELETE_POST'
 export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_POST = 'EDIT_POST'
-
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const UP_VOTE = 'UP_VOTE'
 
 //change allPosts to posts
 export const recieveAllPosts = (posts, postId) => ({
@@ -127,6 +130,27 @@ export const modifyPost = (id, post) => dispatch => {
   })
 }
 
+export const modifyComment = (id, comment) => dispatch => {
+  editComment(id, comment)
+  .then(() => {
+    dispatch({
+      type: EDIT_COMMENT,
+      id,
+      comment
+    })
+  })
+}
+
+export const upVote = (id, action) => dispatch => {
+  votePost(id, action)
+  .then(() => {
+    dispatch({
+      type: UP_VOTE,
+      id,
+      action
+    })
+  })
+}
 
 
 
