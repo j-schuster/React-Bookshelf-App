@@ -1,27 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { upVote } from '../actions/postActions'
+import { upVote, downVote } from '../actions/postActions'
 import UpIcon from 'react-icons/lib/ti/thumbs-up'
 import DownIcon from 'react-icons/lib/ti/thumbs-down'
 
 
 class PostView extends React.Component {
 
-	 getComments(postId, comments){
+	getComments(postId, comments){
 	   const hey = comments.filter((comment) => comment[postId])
 	 return hey.map(x => x[postId].length)
 	}
 
 	vote = (id, action) => {
-		this.props.upVotePost(id, action)
+		action === 'downVote' ? this.props.downVotePost(id, action) : this.props.upVotePost(id, action)
 	}
 
-
 render() {
-	const { comments, posts } = this.props
-   console.log(posts)
- 
+	const { comments } = this.props
+	const posts = this.props.posts
+	
 	return(
 		<div>
 		 {posts !== undefined ? 
@@ -35,11 +34,13 @@ render() {
 				    </Link>  
   				   <p className="list-group-item"><i>By </i> {post.author} <i>On </i>{new Date(post.timestamp).toString().substr(0,16)}</p>
   				   <p className="list-group-item">{post.body}</p>
-  				   <p className="list-group-item details post-icon"><UpIcon onClick={() => this.vote(post.id, 'upvote')}/></p>
+  				   <p className="list-group-item details post-icon">
+  				   <UpIcon className="up-vote" onClick={() => this.vote(post.id, 'upVote')}/></p>
   				   <p className="list-group-item details">{post.voteScore} votes</p>
   				   <p className="list-group-item details">{this.getComments(post.id, comments)}  comments</p>
   				   <p className="list-group-item details">{post.category}</p>
-  				   <p className="list-group-item details post-icon"><DownIcon/></p>
+  				   <p className="list-group-item details post-icon">
+  				   <DownIcon className="down-vote" onClick={() => this.vote(post.id, 'downVote')}/></p>
   				 </div>  
   				)}
 			</div> 
@@ -51,8 +52,10 @@ render() {
 	}
 } 
 
+
 const mapDispatchToProps = dispatch => ({
-  upVotePost: (id, action) => dispatch(upVote(id, action))
+  upVotePost: (id, action) => dispatch(upVote(id, action)),
+  downVotePost: (id, action) => dispatch(downVote(id, action))
 })
 
 export default connect(null, mapDispatchToProps)(PostView)

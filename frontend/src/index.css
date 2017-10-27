@@ -170,7 +170,13 @@ button {
 	margin-left: 15px;
 }
 
+.down-vote {
+	font-size: 30px;
+}
 
+.up-vote {
+	font-size: 30px;
+}
 
 
 

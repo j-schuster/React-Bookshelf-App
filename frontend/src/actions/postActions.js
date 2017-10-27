@@ -8,7 +8,8 @@ import { fetchAllPosts,
     deleteComment,
     editPost,
     editComment,
-    votePost } from '../utils/api'
+    votePost,
+    voteComment } from '../utils/api'
 
 
 export const RECIEVE_POSTS = 'RECIEVE_POSTS'
@@ -22,6 +23,12 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_POST = 'EDIT_POST'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const UP_VOTE = 'UP_VOTE'
+export const DOWN_VOTE = 'DOWN_VOTE'
+export const UP_VOTE_PI ='UP_VOTE_PI'
+export const DOWN_VOTE_PI = 'DOWN_VOTE_PI'
+export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
+export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
+
 
 //change allPosts to posts
 export const recieveAllPosts = (posts, postId) => ({
@@ -152,7 +159,59 @@ export const upVote = (id, action) => dispatch => {
   })
 }
 
+export const downVote = (id, action) => dispatch => {
+  votePost(id, action)
+  .then(() => {
+    dispatch({
+      type: DOWN_VOTE,
+      id,
+      action
+    })
+  })
+}
 
+// vote on post info page because of having two reducers 
+export const upVotePI = (id, action) => dispatch => {
+  votePost(id, action)
+  .then(() => {
+    dispatch({
+      type: UP_VOTE_PI,
+      id,
+      action
+    })
+  })
+}
 
+export const downVotePI = (id, action) => dispatch => {
+  votePost(id, action)
+  .then(() => {
+    dispatch({
+      type: DOWN_VOTE_PI,
+      id,
+      action
+    })
+  })
+}
 
+export const commentUpVote = (id, action) => dispatch => {
+  voteComment(id, action)
+  .then(() => {
+    dispatch({
+      type: UP_VOTE_COMMENT,
+      id,
+      action
+    })
+  })
+}
+
+export const commentDnVote = (id, action) => dispatch => {
+  voteComment(id, action)
+  .then(() => {
+    dispatch({
+      type: DOWN_VOTE_COMMENT,
+      id,
+      action
+    })
+  })
+}
 
