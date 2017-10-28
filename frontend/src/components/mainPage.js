@@ -15,9 +15,16 @@ class MainPage extends React.Component {
 			posts: ''
 		}
 	}
+
 		
-	componentDidMount(){		
+	componentDidMount = () => {
+				
 		this.props.allPosts()
+		
+	}
+
+	componentWillReceiveProps(props){
+		this.setState({ posts: props.posts })
 	}
 
 	 getComments(postId, comments){
@@ -25,33 +32,15 @@ class MainPage extends React.Component {
 	 	return commentsTotal.map(x => x[postId].length)
 	}
 
-	byVotes = () => {
-		const posts = this.props.posts
-		const arranged = posts.sort((a, b) => {
-  					return a.voteScore < b.voteScore
-				})
-		this.setState({ posts: arranged})
-	}
 
-	byTime = () => {
-		const allPosts = this.props.posts
-		const arrByTime = allPosts.sort((a, b) => {
-  					return a.timestamp < b.timestamp
-				})
-		this.setState({ posts: arrByTime})
-	}
-
-	
 
 render() {	
-
-	
+ 
+ 
 	return(
 		<div>	
 			<div className="navbar"><h1>Readable</h1></div>
 			<Categories/>
-			 <button onClick={this.byVotes}>By Votes</button>
-		     <button onClick={this.byTime}>By Time</button>
 			 <PostView posts={this.props.posts} comments={this.props.comments}/>			
 			<Link to='/new/post'>
 			 <div className="add-icon"><AddIcon/></div>
