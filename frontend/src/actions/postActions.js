@@ -1,5 +1,4 @@
 import { fetchAllPosts,
- fetchCategoryPosts,
   fetchPostDetails,
    fetchComments,
     addNewPost,
@@ -61,10 +60,11 @@ export const getAllPosts = () => dispatch => {
     })
   }
 
-export const getCategoryPosts = (category) => dispatch => {
+/*export const getCategoryPosts = (category) => dispatch => {
   fetchCategoryPosts(category)
   .then(data => dispatch(recieveCategoryPosts(data)))
-}
+}*/
+
 // posts POST
 export const addPost = (post) => dispatch => {
   addNewPost(post)

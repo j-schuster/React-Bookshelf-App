@@ -1,7 +1,6 @@
 import { RECIEVE_CATEGORIES } from '../actions/categoryActions'
 import { combineReducers } from 'redux'
 import { RECIEVE_POSTS,
-		 RECIEVE_CATEGORY_POSTS,
 		 RECIEVE_POST_DETAILS,
 		 RECIEVE_COMMENTS,
 		 ADD_NEW_POST,
@@ -65,7 +64,7 @@ function posts(state = [], action) {
 			return state
 	}
 }
-
+/*
 function categoryPosts(state=[], action) {
 	switch(action.type){
 		case RECIEVE_CATEGORY_POSTS:
@@ -75,7 +74,7 @@ function categoryPosts(state=[], action) {
 			return state
 	}
 }
-
+*/
 function postDetails(state={}, action) {
 	switch(action.type){
 		case RECIEVE_POST_DETAILS:
@@ -179,7 +178,6 @@ function comments(state={}, action) {
 const rootReducer = combineReducers({
 	categories,
 	posts,
-	categoryPosts,
 	postDetails,
 	comments,
 })

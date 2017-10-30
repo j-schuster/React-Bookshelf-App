@@ -64,6 +64,29 @@ body {
 	text-align: center;
 }
 
+.all-posts h4 {
+	margin-left: 50px;
+}
+
+.categories a {
+	color: black;
+	text-transform: uppercase;
+}
+
+.categories a:hover {
+	text-decoration: none;
+}
+
+.categories p:hover {
+	background-color: pink;
+}
+
+.mainpage h1 {
+	text-transform: uppercase;
+	text-align: center;
+	margin-top: -50px;
+}
+
 .form {
 	width: 40%;
 	margin: 0 auto;

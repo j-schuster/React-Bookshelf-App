@@ -63,13 +63,6 @@ export const addNewPost = (post) => {
   .then(data => data.json())
 }
 
-// POST /posts/:id
-
-// POST /comments
-
-// POST /comments/:id
-
-
 // ==================== DELETE ====================//
 
 // delete post 

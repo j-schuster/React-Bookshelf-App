@@ -47,14 +47,15 @@ class PostView extends React.Component {
 
 render() {
 	const { comments } = this.props
-	const posts = this.props.posts
+	//const posts = this.props.posts
 	const info = this.state.posts
-    console.log(typeof info)
+ 
 	return(
-		<div>
-		<button onClick={this.byVotes}>By Votes</button>
-		 <button onClick={this.byTime}>By Time</button>
-		 {posts !== undefined ? 
+		<div className="all-posts">
+		<h4>Organize Posts</h4>
+		 <button className="btn btn-default" onClick={this.byVotes}>By Votes</button>
+		 <button className="btn btn-default" onClick={this.byTime}>By Time</button>
+		 {info ? 
 			<div className="list-group posts-main">
   				{info.map((post) => 
   				 <div key={post.id} className="post">	

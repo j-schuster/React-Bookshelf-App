@@ -38,7 +38,7 @@ render() {
  
  
 	return(
-		<div>	
+		<div className="mainpage">
 			<div className="navbar"><h1>Readable</h1></div>
 			<Categories/>
 			 <PostView posts={this.props.posts} comments={this.props.comments}/>			
