@@ -12,13 +12,13 @@ export const headers = {
   Authorization: owner
 };
 
-//CATEGORIES
+// All categories
 export const fetchAllCategories = () => {
 	return fetch(`${API}/categories`, { headers })
     .then(res => res.json())
     .then(data => data)
 }
-// POSTS
+// All posts
 export const fetchAllPosts = () => {
 	return fetch(`${API}/posts`, { headers })
     .then(res => res.json())

@@ -38,8 +38,9 @@ render() {
  
  
 	return(
-		<div className="mainpage">
+		<div>
 			<div className="navbar"><h1>Readable</h1></div>
+
 			<Categories/>
 			 <PostView posts={this.props.posts} comments={this.props.comments}/>			
 			<Link to='/new/post'>

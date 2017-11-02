@@ -209,12 +209,13 @@ class PostInfo extends React.Component {
                            </textarea>
                            </div>
                           <div className="form-group">  
-                           <input className="form-control" 
+                           <textarea className="form-control" 
                                   onChange={this.handleChange}
                                   type="text" placeholder="Your Name"
-                                  name="commentAuthor"
-                                  value={this.state.commentAuthor}>                          
-                           </input>
+                                  value={this.state.commentAuthor}  
+                                  name="commentAuthor">
+                                                          
+                           </textarea>
                           </div>
                           <button type="submit" className="add-comment btn">Submit!</button>
                       </form>               

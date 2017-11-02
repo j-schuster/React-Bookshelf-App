@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 //import { getCategoryPosts } from '../actions/postActions'
 import { getAllPosts } from '../actions/postActions'
 import PostView from './postView'
@@ -36,7 +37,9 @@ class Post extends React.Component {
 		const { comments } = this.props
 		return(
 	 	<div>
-	 		<div className="navbar"><h1>Readable</h1></div>
+	 		<Link to='/'>
+	 			<div className="navbar"><h1>Readable</h1></div>
+	 		</Link>
 			<PostView posts={categoryPosts} comments={comments}/>
 		</div>
 		);

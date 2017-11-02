@@ -5,19 +5,19 @@ body {
 }
 
 .navbar {
-	height: 10vh;
-	
+	height: 10vh;	
 	border-radius: 0 !important;
-	background: #34495e;
+	background: #c0392b;
 	color: white;
 	text-align: center;
 }
 
+
 .categories {
 	width: 12%;
-	margin: 20px;
+	margin: 20px 0 0 35px;
 	text-align: center;
-	border: 1px solid #898989;
+	border: 1px solid #34495e;
 	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
 }
 
@@ -25,12 +25,14 @@ body {
 	width: 60%;
 	margin: 0 auto;
 	text-align: center;
+
 }
 
 .post {
 	border: 1px solid #898989;
 	margin: 10px;
 	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
+	border-radius: 5px;
 }
 
 .list-group .list-group-item {
@@ -38,9 +40,13 @@ body {
 
 }
 
+.list-group .active:hover {
+	background-color: #b71f1f;
+}
+
 .list-group .active {
 	margin: 0px;
-	background-color: #34495e;
+	background-color: #c0392b;
 	border-radius: 0 !important;
 }
 
@@ -75,10 +81,13 @@ body {
 
 .categories a:hover {
 	text-decoration: none;
+	border-radius: none;
 }
 
 .categories p:hover {
-	background-color: pink;
+	background-color: #ededed;
+	text-decoration: none;
+	border-radius: none;
 }
 
 .mainpage h1 {
@@ -112,7 +121,7 @@ button {
 	float: right;
 	margin: 50px;
 	font-size: 45px;
-	color: #34495e;
+	color: #2980b9;
 	height: 45px;
 	line-height: 2px;
 	border-radius: 22px;
