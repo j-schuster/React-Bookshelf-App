@@ -14,7 +14,8 @@ class AddPost extends React.Component {
 		    postAuthor: '',
 		  postCategory: '',
 		      redirect: false,
-		        linkId: ''
+		        linkId: '',
+		        value: 'react'
 		}
 	}
 
@@ -79,9 +80,10 @@ class AddPost extends React.Component {
 					    </div>
 					    <select className="form-control"
 					    		  name="postCategory"  
-					    		  onChange={this.handleChange}>
+					    		  onChange={this.handleChange}
+					    		  defaultValue="react">
 					      <option value="select" disabled>Select category...</option>		
-					   	  <option value="react">React</option>
+					   	  <option value="react" >React</option>
 					   	  <option value="redux">Redux</option>
 					   	  <option value="udacity">Udacity</option>
 					    </select>				    

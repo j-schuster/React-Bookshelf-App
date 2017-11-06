@@ -1,37 +1,55 @@
+
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
+p {
+	font-size: 16px;
+}
+
+.loading {
+	margin: 0 auto;
+}
+
 .navbar {
 	height: 10vh;	
 	border-radius: 0 !important;
-	background: #c0392b;
-	color: white;
-	text-align: center;
+	background: #495867;
+	color: white;	
+	text-transform: uppercase;
+}
+
+.chat {
+	margin: 5px;
 }
 
 
 .categories {
-	width: 12%;
-	margin: 20px 0 0 35px;
-	text-align: center;
-	border: 1px solid #34495e;
-	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
+	margin-top: 15px;
+	width: 100%;
+	text-align: center;	
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
+	display: inline-block;
+	border-radius: 5px;
 }
 
 .posts-main {
-	width: 60%;
+	/*
+	margin: 20px 0 0 35px;
+	*/
+	width: 100%;
 	margin: 0 auto;
 	text-align: center;
 
 }
 
 .post {
-	border: 1px solid #898989;
-	margin: 10px;
-	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
+	
+	margin: 10px auto;
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
 	border-radius: 5px;
 }
 
@@ -41,13 +59,14 @@ body {
 }
 
 .list-group .active:hover {
-	background-color: #b71f1f;
+	background-color: #577399;
 }
 
 .list-group .active {
 	margin: 0px;
-	background-color: #c0392b;
+	background-color: #577399;
 	border-radius: 0 !important;
+
 }
 
 .details {
@@ -55,23 +74,22 @@ body {
 	padding: 0;
 	margin: 50px;
 	text-transform: lowercase;
-
-}
-/*
-.details:nth-of-type(3) {
-	font-size: 25px;
-}
-
-.details:nth-of-type(7) {
-	font-size: 25px;
-}
-*/
-.add-post {
-	text-align: center;
 }
 
 .all-posts h4 {
 	margin-left: 50px;
+
+}
+
+.loading {
+  position: absolute;
+  margin: 200px auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100px;
+  width: 100px;
 }
 
 .categories a {
@@ -119,13 +137,10 @@ button {
 
 .add-icon {
 	float: right;
-	margin: 50px;
+	margin-right: 200px;
 	font-size: 45px;
-	color: #2980b9;
-	height: 45px;
-	line-height: 2px;
-	border-radius: 22px;
-	box-shadow: 4px 5px 5px 0px rgba(173,173,173,1);
+	color: #FE5F55;
+	width: 50px;
 }
 
 .back-icon {
@@ -175,12 +190,25 @@ button {
 }
 
 .post-icon {
-	font-size: 20px;
-	margin: 15px;
+	font-size: 40px;
+	margin: 25px;
+	cursor: pointer;	
 }
 
 .post-icon:hover {
 	color: red;
+}
+
+.edit-icon {
+	font-size: 25px;
+	margin: 15px;
+	cursor: pointer;
+}
+
+.trash-icon {
+	font-size: 25px;
+	margin: 15px;
+	cursor: pointer;
 }
 
 .com-auth {

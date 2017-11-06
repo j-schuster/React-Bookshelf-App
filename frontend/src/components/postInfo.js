@@ -2,12 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ReactModal from 'react-modal'
-import UpIcon from 'react-icons/lib/ti/thumbs-up'
-import DownIcon from 'react-icons/lib/ti/thumbs-down'
+import UpIcon from 'react-icons/lib/md/arrow-drop-up'
+import DownIcon from 'react-icons/lib/md/arrow-drop-down'
 import { Redirect } from 'react-router-dom'
 import TrashCan from 'react-icons/lib/fa/trash'
 import EditIcon from 'react-icons/lib/fa/edit'
 import AddComIcon from 'react-icons/lib/md/control-point'
+import Chat from 'react-icons/lib/md/chat'
+import Spinner from 'react-spinner-material'
 import { upVotePI, downVotePI, commentUpVote ,commentDnVote} from '../actions/postActions'
 
 import { getPostDetails,
@@ -37,7 +39,7 @@ class PostInfo extends React.Component {
 
 	componentDidMount(){
 		const id = window.location.pathname
-		this.props.loadPostInfo(id)
+    setTimeout(function() { this.props.loadPostInfo(id) }.bind(this), 1000);
 	}
 
   removePost = (id) => {
@@ -136,7 +138,7 @@ class PostInfo extends React.Component {
 		return(
 			<div>
         <Link to='/'>
-			   <div className="navbar"><h1>Readable</h1></div>
+			   <div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
         </Link>
 				  {post !== undefined ? 
 					   <div className="list-group posts-main">
@@ -144,15 +146,15 @@ class PostInfo extends React.Component {
   				       <div key={post.id} className="post">	
   				         <h3 className="list-group-item active">{post.title}</h3>
   				            <p className="list-group-item"><i>By </i> {post.author} <i>On </i>{new Date(post.timestamp).toString().substr(0,16)}</p>
-  				            <p className="list-group-item">{post.body}</p>
-  				            <p className="list-group-item details vote-icon"><UpIcon  onClick={()=> this.vote(post.id, 'upVote')}/></p>
+  				            <p className="list-group-item"><samp>{post.body}</samp></p>
+  				            <p className="list-group-item details post-icon"><UpIcon  onClick={()=> this.vote(post.id, 'upVote')}/></p>
   				            <p className="list-group-item details">{post.voteScore} votes</p>
   				            <p className="list-group-item details"></p>
   				            <p className="list-group-item details">{post.category}</p>
-  				            <p className="list-group-item details vote-icon"><DownIcon onClick={()=> this.vote(post.id, 'downVote')}/></p>
+  				            <p className="list-group-item details post-icon"><DownIcon onClick={()=> this.vote(post.id, 'downVote')}/></p>
                       <div >
-                      <EditIcon className="post-icon" onClick={() => this.handleModal('editPostModal')}/>
-                      <TrashCan className="post-icon" onClick={() => this.removePost(post.id)}/>
+                      <EditIcon className="edit-icon" onClick={() => this.handleModal('editPostModal')}/>
+                      <TrashCan className="trash-icon" onClick={() => this.removePost(post.id)}/>
                       </div>
                       <hr/>
 
@@ -225,15 +227,15 @@ class PostInfo extends React.Component {
                           <div className="list-group" key={comment.id}>  
                              <p className="com-auth details"><i>{comment.author} commented:</i></p>
                             
-                             <p className="list-group-item">{comment.body}</p>
+                             <p className="list-group-item"><samp>{comment.body}</samp></p>
                         
-                             <p className="list-group-item details vote-icon"><UpIcon onClick={() => this.voteComment(comment.id, 'upVote')}/></p>
+                             <p className="list-group-item details post-icon"><UpIcon onClick={() => this.voteComment(comment.id, 'upVote')}/></p>
                              <p className="list-group-item details">{new Date(comment.timestamp).toString().substr(0,16)}</p>
                              <p className="list-group-item details">{comment.voteScore} votes</p>
-                             <p className="list-group-item details vote-icon"><DownIcon onClick={() => this.voteComment(comment.id, 'downVote')}/></p>
+                             <p className="list-group-item details post-icon"><DownIcon onClick={() => this.voteComment(comment.id, 'downVote')}/></p>
                           <div>
-                        <EditIcon className="post-icon" onClick={() => this.handleModal('editCommentModal', comment.body, comment.author, comment.id)}/> 
-                        <TrashCan className="post-icon" onClick={() => this.deleteComment(comment.id)}/>
+                        <EditIcon className="edit-icon" onClick={() => this.handleModal('editCommentModal', comment.body, comment.author, comment.id)}/> 
+                        <TrashCan className="trash-icon" onClick={() => this.deleteComment(comment.id)}/>
                         
                       <ReactModal 
                         isOpen={this.state.editCommentModal}    
@@ -275,7 +277,14 @@ class PostInfo extends React.Component {
   				     )}         
 		      	 </div>	
 			    : 
-			   <h1>CHILL</h1>
+			     <div className="loading">
+     <Spinner
+        size={120}
+        spinnerColor={"red"}
+        spinnerWidth={2}
+        visible={true}
+         />
+         </div>
 			 }
 			</div>		
 		);

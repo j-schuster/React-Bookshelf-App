@@ -5,22 +5,21 @@ import { Link } from 'react-router-dom'
 import { getAllPosts } from '../actions/postActions'
 import PostView from './postView'
 import AddIcon from 'react-icons/lib/md/add-circle'
-
+import Chat from 'react-icons/lib/md/chat'
 
 class MainPage extends React.Component {
 
 	constructor(props){
 		super(props);
 		this.state = {
-			posts: ''
+			posts: '',
+			
 		}
 	}
 
 		
 	componentDidMount = () => {
-				
 		this.props.allPosts()
-		
 	}
 
 	componentWillReceiveProps(props){
@@ -35,18 +34,15 @@ class MainPage extends React.Component {
 
 
 render() {	
- 
- 
+
 	return(
 		<div>
-			<div className="navbar"><h1>Readable</h1></div>
-
-			<Categories/>
-			 <PostView posts={this.props.posts} comments={this.props.comments}/>			
+			<div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
+			<div className="col-md-2"><Categories/></div>
+			<div className="col-md-8"><PostView posts={this.props.posts} comments={this.props.comments}/>	</div>			
 			<Link to='/new/post'>
-			 <div className="add-icon"><AddIcon/></div>
-			 </Link>
-
+		    <div className="add-icon"><AddIcon/></div>
+			</Link>	
 		</div>
 		);	
 	}

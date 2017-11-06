@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch, Router } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import MainPage from './components/mainPage'
 import Post from './components/posts'
 import AddPost from './components/addPost'
