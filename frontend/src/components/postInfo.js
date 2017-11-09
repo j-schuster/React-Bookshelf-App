@@ -149,10 +149,10 @@ class PostInfo extends React.Component {
 			<div>
         <Link to='/'>
 			   <div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
-        </Link>
-				  {!loading ? 
-					   <div className="list-group posts-main">
-  				     {post.map((post) => 
+           </Link>
+				    {!loading ? 
+					    <div className="list-group posts-main">
+  				      {post.map((post) => 
   				       <div key={post.id} className="post">	
   				         <h3 className="list-group-item active">{post.title}</h3>
   				            <p className="list-group-item"><i>By </i> {post.author} <i>On </i>{new Date(post.timestamp).toString().substr(0,16)}</p>
@@ -169,10 +169,10 @@ class PostInfo extends React.Component {
                       <hr/>
 
                       <ReactModal 
-                        isOpen={this.state.editPostModal}    
-                        className="Modal"
-                        overlayClassName="Overlay"
-                        >
+                          isOpen={this.state.editPostModal}    
+                          className="Modal"
+                          overlayClassName="Overlay"
+                      >
 
                       <form onSubmit={(e) => this.handleSubmit(post.id, e)}
                             className="add-comment-form">
@@ -196,14 +196,12 @@ class PostInfo extends React.Component {
                            </div>
                            <button type="submit" className="add-comment btn">Submit!</button>
                       </form>               
-                      </ReactModal>
-                      
+                      </ReactModal>                    
                       <div className="comments-section">
                         <AddComIcon className="com-icon" 
                                 onClick={() => this.handleModal('commentModal')}/>
                                 <h6 className="comments-header">COMMENTS</h6>
-                                <hr/>
-                 
+                                <hr/>                 
                       <ReactModal 
                         isOpen={this.state.commentModal}    
                         className="Modal"
@@ -230,10 +228,10 @@ class PostInfo extends React.Component {
                            </textarea>
                           </div>
                           <button type="submit" className="add-comment btn">Submit!</button>
-                      </form>               
-                      </ReactModal>
-                       {comments.map((comment) => (
-                          <div className="list-group" key={comment.id}>  
+                        </form>               
+                        </ReactModal>
+                        {comments.map((comment) => (
+                            <div className="list-group" key={comment.id}>  
                              <p className="com-auth details"><i>{comment.author} commented:</i></p>                          
                              <p className="list-group-item"><samp>{comment.body}</samp></p>                     
                              <p className="list-group-item details post-icon"><UpIcon onClick={() => this.voteComment(comment.id, 'upVote')}/></p>
@@ -241,65 +239,61 @@ class PostInfo extends React.Component {
                              <p className="list-group-item details">{comment.voteScore} votes</p>
                              <p className="list-group-item details post-icon"><DownIcon onClick={() => this.voteComment(comment.id, 'downVote')}/></p>
                           <div>
-                        <EditIcon className="edit-icon" onClick={() => this.handleModal('editCommentModal', comment.body, comment.author, comment.id)}/> 
-                        <TrashCan className="trash-icon" onClick={() => this.deleteComment(comment.id)}/>
+                         <EditIcon className="edit-icon" onClick={() => this.handleModal('editCommentModal', comment.body, comment.author, comment.id)}/> 
+                         <TrashCan className="trash-icon" onClick={() => this.deleteComment(comment.id)}/>
                         
-                      <ReactModal 
-                        isOpen={this.state.editCommentModal}    
-                        className="Modal"
-                        overlayClassName="Overlay"
-                        >
-
-                      <form onSubmit={(e) => this.handleEditComment(e)}
-                            className="add-comment-form">
-                           <div className="form-group">
-                           <input className="form-control"
-                                     onChange={this.handleChange}
-                                     type="text" 
-                                     value={this.state.commentBody}
-                                     name="commentBody"
-                                     >
-                           </input>
-                           </div>
-                           <div className="form-group">  
-                           <textarea className="form-control" 
-                                  onChange={this.handleChange}
-                                  type="text" 
-                                  value={this.state.commentAuthor}
-                                  name="commentAuthor"
-                                  >                          
-                           </textarea>
-                           </div>
-                           <button type="submit" className="add-comment btn">Submit!</button>
-                      </form>               
-                      </ReactModal>
-
-
+                         <ReactModal 
+                           isOpen={this.state.editCommentModal}    
+                           className="Modal"
+                           overlayClassName="Overlay"
+                           >
+                        <form onSubmit={(e) => this.handleEditComment(e)}
+                              className="add-comment-form">
+                             <div className="form-group">
+                             <input className="form-control"
+                                       onChange={this.handleChange}
+                                       type="text" 
+                                       value={this.state.commentBody}
+                                       name="commentBody"
+                                       >
+                             </input>
+                             </div>
+                             <div className="form-group">  
+                             <textarea className="form-control" 
+                                    onChange={this.handleChange}
+                                    type="text" 
+                                    value={this.state.commentAuthor}
+                                    name="commentAuthor"
+                                    >                          
+                             </textarea>
+                             </div>
+                            <button type="submit" className="add-comment btn">Submit!</button>
+                          </form>               
+                         </ReactModal>
                        </div>
                       <hr/>
-                     </div>
-                    ))}
-                  </div>              
-  				       </div>  
-  				     )}         
-		      	 </div>	
+                    </div>
+                  ))}
+                </div>              
+  				     </div>  
+  				   )}         
+		       </div>	
 			    : 
 			     <div className="loading">
-     <Spinner
-        size={120}
-        spinnerColor={"red"}
-        spinnerWidth={2}
-        visible={true}
-         />
-         </div>
-			 }
+           <Spinner
+              size={120}
+              spinnerColor={"red"}
+              spinnerWidth={2}
+              visible={true}
+           />
+          </div>
+			  }
 			</div>		
 		);
 	}
 }
 
 const mapStateToProps = state => {
-
 	return {
 		postDetails: state.postDetails.post,
 		postComments: state.postDetails.comments

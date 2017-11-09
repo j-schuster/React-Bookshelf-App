@@ -9,23 +9,18 @@ import NotFound from './components/notFound'
 
 
 class App extends Component {
-
-
-  render() {
-    
-    return (
-   
+  render() { 
+    return (  
       <Switch>
          <Route exact path="/" render={() => (<MainPage/>)}/>
          <Route exact path="/:category" render={() => (<Post/>)}/>      
          <Route exact path="/posts/:id" render={() => (<PostInfo/>)}/> 
          <Route exact path="/new/post" render={() => (<AddPost/>)}/> 
          <Route exact path="*" render={() => (<NotFound/>)}/>     
-      </Switch> 
-             
+      </Switch>              
     );
   }
 }
 
-export default App;
+export default App
 

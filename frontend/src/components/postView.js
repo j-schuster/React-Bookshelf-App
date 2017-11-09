@@ -22,8 +22,8 @@ class PostView extends React.Component {
 	}
 
 	getComments(postId, comments){
-	   const hey = comments.filter((comment) => comment[postId])
-	 return hey.map(x => x[postId].length)
+	   const commentsOnPost = comments.filter((comment) => comment[postId])
+	 return commentsOnPost.map(x => x[postId].length)
 	}
 
 	vote = (id, action) => {
@@ -32,69 +32,59 @@ class PostView extends React.Component {
 
 	byVotes = () => {
 		const posts = this.props.posts
-		const arranged = posts.sort((a, b) => {
-  			return a.voteScore < b.voteScore
-			})
+		const arranged = posts.sort((a, b) => { return a.voteScore < b.voteScore })
 		this.setState({ posts: arranged})
 	}
 
 	byTime = () => {
 		const allPosts = this.props.posts
-		const arrByTime = allPosts.sort((a, b) => {
-  			return a.timestamp < b.timestamp
-			})
+		const arrByTime = allPosts.sort((a, b) => { return a.timestamp < b.timestamp })
 		this.setState({ posts: arrByTime })
 	}
 
 	
-
-
 render() {
 	const { comments } = this.props
-	//const posts = this.props.posts
 	const info = this.state.posts
 	
- 
 	return(
 		<div className="all-posts">
-		 {info ? 
+		  {info ? 
 			<div className="list-group posts-main">
-			<div className="organize">
+			  <div className="organize">
 				<h4>Organize Posts</h4>
  				<button className="btn btn-default" onClick={this.byVotes}>Most Votes</button>
  				<button className="btn btn-default" onClick={this.byTime}>Most Recent</button>
-			</div>
-  				{info.map((post) => 
-  				 <div key={post.id} className="post">	
-  				   	<Link to={`/posts/${post.id}`} key={post.name}>	
-					   <h3 className="list-group-item active">
-					   
+			  </div>
+  			  {info.map((post) => 
+  				<div key={post.id} className="post">	
+  				   <Link to={`/posts/${post.id}`} key={post.name}>	
+					  <h3 className="list-group-item active">					   
 					   {post.title}</h3>
 				    </Link>  
-  				   <p className="list-group-item"><i>By </i> {post.author} <i>On </i>{new Date(post.timestamp).toString().substr(0,16)}</p>
-  				   <p className="list-group-item"><samp>{post.body}</samp></p>
-  				   <p className="list-group-item details post-icon">
-  				   <UpIcon onClick={() => this.vote(post.id, 'upVote')}/></p>
-  				   <p className="list-group-item details">{post.voteScore} votes</p>
-  				   <p className="list-group-item details">{this.getComments(post.id, comments)}  comments</p>
-  				   <p className="list-group-item details">{post.category}</p>
-  				   <p className="list-group-item details post-icon">
+  				    <p className="list-group-item"><i>By </i> {post.author} <i>On </i>{new Date(post.timestamp).toString().substr(0,16)}</p>
+  				     <p className="list-group-item"><samp>{post.body}</samp></p>
+  				      <p className="list-group-item details post-icon">
+  				       <UpIcon onClick={() => this.vote(post.id, 'upVote')}/></p>
+  				        <p className="list-group-item details">{post.voteScore} votes</p>
+  				       <p className="list-group-item details">{this.getComments(post.id, comments)}  comments</p>
+  				      <p className="list-group-item details">{post.category}</p>
+  				     <p className="list-group-item details post-icon">
   				   <DownIcon onClick={() => this.vote(post.id, 'downVote')}/></p>
   				 </div>  
   				)}
 			</div> 
 			:	
-			<div className="loading">
-		 <Spinner
-        size={120}
-        spinnerColor={"red"}
-        spinnerWidth={2}
-        visible={true}
-         />
-         </div>
-		}
-
-		</div>
+				<div className="loading">
+			 		<Spinner
+	        			size={120}
+	        			spinnerColor={"red"}
+	        			spinnerWidth={2}
+	       				visible={true}
+	        		 />
+	        	</div>
+				}
+			</div>
 		);	
 	}
 } 
@@ -106,11 +96,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(PostView)
-
-
-/*
-<h4>Organize Posts</h4>
- <button className="btn btn-default" onClick={this.byVotes}>By Votes</button>
- <button className="btn btn-default" onClick={this.byTime}>By Time</button>
-
-*/

@@ -38,10 +38,10 @@ render() {
 	return(
 		<div>
 			<div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
-			<div className="col-md-2"><Categories/></div>
-			<div className="col-md-8"><PostView posts={this.props.posts} comments={this.props.comments}/>	</div>			
-			<Link to='/new/post'>
-		    <div className="add-icon"><AddIcon/></div>
+				<div className="col-md-2"><Categories/></div>
+					<div className="col-md-8"><PostView posts={this.props.posts} comments={this.props.comments}/>	</div>			
+					<Link to='/new/post'>
+		    	<div className="add-icon"><AddIcon/></div>
 			</Link>	
 		</div>
 		);	

@@ -31,18 +31,15 @@ function categories(state=[], action) {
 function posts(state = [], action) {
 	switch(action.type){
 		case RECIEVE_POSTS:
-		const posts = action.posts
-		
+		const posts = action.posts	
 			return {
 				...state,
 				posts: posts
 			}
-
 		case ADD_NEW_POST:
 			return [...state, action.post]
 		case DELETE_POST:
 			return [...state]
-
 		case UP_VOTE:		
 		const postsAll = [...state.posts]
 		const targetUp = postsAll.findIndex(post => post.id === action.id)
@@ -51,7 +48,6 @@ function posts(state = [], action) {
 				...state,
 				 posts: [...postsAll]
 				}
-
 		case DOWN_VOTE:		
 		const postsToEdit = [...state.posts]
 		const targetDown = postsToEdit.findIndex(post => post.id === action.id)
@@ -64,17 +60,7 @@ function posts(state = [], action) {
 			return state
 	}
 }
-/*
-function categoryPosts(state=[], action) {
-	switch(action.type){
-		case RECIEVE_CATEGORY_POSTS:
-		const categoryPosts = action.categoryPosts
-			return categoryPosts	
-		default:
-			return state
-	}
-}
-*/
+
 function postDetails(state={}, action) {
 	switch(action.type){
 		case RECIEVE_POST_DETAILS:
@@ -132,32 +118,25 @@ function postDetails(state={}, action) {
 				}	
 
 		case UP_VOTE_COMMENT:
-		// copy all comments 
 		const comToEdit = [...state.comments]
-		// find index	
 		const targetComUp = comToEdit.findIndex(comment => comment.id === action.id)
-		// change the voteScore of that comment
 		comToEdit[targetComUp].voteScore = comToEdit[targetComUp].voteScore + 1
 			return {
 				...state,
 				comments: [...comToEdit]
 			}
 		case DOWN_VOTE_COMMENT:
-		const comsToEdit = [...state.comments]
-		// find index	
+		const comsToEdit = [...state.comments]	
 		const targetComDn = comsToEdit.findIndex(comment => comment.id === action.id)
-		// change the voteScore of that comment
 		comsToEdit[targetComDn].voteScore = comsToEdit[targetComDn].voteScore - 1
 			return {
 				...state,
 				comments: [...comsToEdit]
 			}		
-
 		default:
 			return state
 	}
 }
-
 
 function comments(state={}, action) {
 	switch(action.type){
@@ -171,9 +150,6 @@ function comments(state={}, action) {
 			return state
 	}
 }
-
-
-
 
 const rootReducer = combineReducers({
 	categories,

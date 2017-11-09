@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-//import { getCategoryPosts } from '../actions/postActions'
 import { getAllPosts } from '../actions/postActions'
 import PostView from './postView'
 
@@ -15,8 +14,6 @@ class Post extends React.Component {
 	}
 	
 	componentDidMount(){
-		//const category = window.location.pathname
-		//this.props.catPosts(category)
 		this.props.getPostsAll()
 	}
 
@@ -30,7 +27,6 @@ class Post extends React.Component {
 		}
 
 	}
-
 
 	render(){
 		const categoryPosts = this.state.posts
@@ -51,14 +47,12 @@ const mapStateToProps = state => {
 	
 
 	return {
-		//categoryPosts : categoryPosts,
 		comments: [comments],
 		posts: posts.posts
 	}
 }
 
 const mapDispatchToProps = dispatch => ({
-  //catPosts: (category) => dispatch(getCategoryPosts(category)),
   getPostsAll: () => dispatch(getAllPosts())
 })
 
