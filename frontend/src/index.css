@@ -40,6 +40,7 @@ p {
 	/*
 	margin: 20px 0 0 35px;
 	*/
+	padding: 40px;
 	width: 100%;
 	margin: 0 auto;
 	text-align: center;
@@ -237,6 +238,21 @@ button {
 .up-vote {
 	font-size: 30px;
 }
+
+.organize {
+	margin-bottom: 60px;
+}
+
+.organize h4 {
+	text-align: right;
+}
+
+.organize button {
+	float: right;
+	margin: 0;
+	
+}
+
 
 
 

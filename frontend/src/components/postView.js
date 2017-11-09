@@ -12,15 +12,13 @@ class PostView extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			posts: '',
+			posts: ''
 		}
 	}
 
+
 	componentWillReceiveProps(props){
-		setTimeout(function(){
-			this.setState({posts: props.posts})
-		}.bind(this), 1000);
-		
+		setTimeout(function(){ this.setState({posts: props.posts})}.bind(this), 500);		
 	}
 
 	getComments(postId, comments){
@@ -32,7 +30,7 @@ class PostView extends React.Component {
 		action === 'downVote' ? this.props.downVotePost(id, action) : this.props.upVotePost(id, action)
 	}
 
-		byVotes = () => {
+	byVotes = () => {
 		const posts = this.props.posts
 		const arranged = posts.sort((a, b) => {
   			return a.voteScore < b.voteScore
@@ -48,18 +46,24 @@ class PostView extends React.Component {
 		this.setState({ posts: arrByTime })
 	}
 
+	
+
 
 render() {
 	const { comments } = this.props
 	//const posts = this.props.posts
 	const info = this.state.posts
+	
  
 	return(
 		<div className="all-posts">
-		
-		
 		 {info ? 
 			<div className="list-group posts-main">
+			<div className="organize">
+				<h4>Organize Posts</h4>
+ 				<button className="btn btn-default" onClick={this.byVotes}>Most Votes</button>
+ 				<button className="btn btn-default" onClick={this.byTime}>Most Recent</button>
+			</div>
   				{info.map((post) => 
   				 <div key={post.id} className="post">	
   				   	<Link to={`/posts/${post.id}`} key={post.name}>	
@@ -89,6 +93,7 @@ render() {
          />
          </div>
 		}
+
 		</div>
 		);	
 	}
@@ -106,6 +111,6 @@ export default connect(null, mapDispatchToProps)(PostView)
 /*
 <h4>Organize Posts</h4>
  <button className="btn btn-default" onClick={this.byVotes}>By Votes</button>
-		 <button className="btn btn-default" onClick={this.byTime}>By Time</button>
+ <button className="btn btn-default" onClick={this.byTime}>By Time</button>
 
 */

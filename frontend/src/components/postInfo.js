@@ -32,14 +32,22 @@ class PostInfo extends React.Component {
       redirect: false,
       commentModal: false,
       editPostModal: false,
-      editCommentModal: false
+      editCommentModal: false,
+      loading: true
       
     }
   }
 
+  componentWillMount(){
+    this.setState({ loading: true })
+  }
+
 	componentDidMount(){
 		const id = window.location.pathname
-    setTimeout(function() { this.props.loadPostInfo(id) }.bind(this), 1000);
+    this.props.loadPostInfo(id) 
+    setTimeout(function() { 
+      this.setState({ loading: false })
+     }.bind(this), 500);
 	}
 
   removePost = (id) => {
@@ -131,6 +139,8 @@ class PostInfo extends React.Component {
     const { redirect } = this.state
 		const post = this.props.postDetails
 		const comments = this.props.postComments
+    const loading = this.state.loading
+    
 	
     if(redirect){
        return <Redirect to='/'/>
@@ -140,7 +150,7 @@ class PostInfo extends React.Component {
         <Link to='/'>
 			   <div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
         </Link>
-				  {post !== undefined ? 
+				  {!loading ? 
 					   <div className="list-group posts-main">
   				     {post.map((post) => 
   				       <div key={post.id} className="post">	
@@ -222,13 +232,10 @@ class PostInfo extends React.Component {
                           <button type="submit" className="add-comment btn">Submit!</button>
                       </form>               
                       </ReactModal>
-
                        {comments.map((comment) => (
                           <div className="list-group" key={comment.id}>  
-                             <p className="com-auth details"><i>{comment.author} commented:</i></p>
-                            
-                             <p className="list-group-item"><samp>{comment.body}</samp></p>
-                        
+                             <p className="com-auth details"><i>{comment.author} commented:</i></p>                          
+                             <p className="list-group-item"><samp>{comment.body}</samp></p>                     
                              <p className="list-group-item details post-icon"><UpIcon onClick={() => this.voteComment(comment.id, 'upVote')}/></p>
                              <p className="list-group-item details">{new Date(comment.timestamp).toString().substr(0,16)}</p>
                              <p className="list-group-item details">{comment.voteScore} votes</p>
