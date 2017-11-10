@@ -1,6 +1,6 @@
 import { RECIEVE_CATEGORIES } from '../actions/categoryActions'
 import { combineReducers } from 'redux'
-import { RECIEVE_POSTS,
+import { RECIEVE_POSTS, 
 		 RECIEVE_POST_DETAILS,
 		 RECIEVE_COMMENTS,
 		 ADD_NEW_POST,
@@ -14,9 +14,9 @@ import { RECIEVE_POSTS,
 		 UP_VOTE_PI,
 		 DOWN_VOTE_PI,
 		 UP_VOTE_COMMENT,
-		 DOWN_VOTE_COMMENT
-		 } from '../actions/postActions'
-
+		 DOWN_VOTE_COMMENT,
+		 EDIT_POST_IN_POSTS
+		 } from '../actions/actionTypes'
 
 function categories(state=[], action) {
 	switch(action.type){
@@ -36,6 +36,14 @@ function posts(state = [], action) {
 				...state,
 				posts: posts
 			}
+		case EDIT_POST_IN_POSTS:
+		const psts = [...state.posts]
+		const tpst = psts.findIndex(post => post.id === action.id)
+		const editedP = Object.assign(psts[tpst], action.post)		
+			return {
+				...state, 
+				post: [editedP]
+			}	
 		case ADD_NEW_POST:
 			return [...state, action.post]
 		case DELETE_POST:

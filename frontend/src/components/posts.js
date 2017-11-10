@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getAllPosts } from '../actions/postActions'
 import PostView from './postView'
+import Chat from 'react-icons/lib/md/chat'
 
 class Post extends React.Component {
 
@@ -34,7 +35,7 @@ class Post extends React.Component {
 		return(
 	 	<div>
 	 		<Link to='/'>
-	 			<div className="navbar"><h1>Readable</h1></div>
+	 			<div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
 	 		</Link>
 			<PostView posts={categoryPosts} comments={comments}/>
 		</div>

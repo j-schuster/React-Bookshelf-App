@@ -171,7 +171,7 @@ button {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: transparent;
+    background-color: #bcbcbc;
  }
 
 .add-comment-form {
@@ -196,6 +196,13 @@ button {
 	cursor: pointer;	
 }
 
+.exit-icon {
+	float: right;
+	font-size: 20px;
+	margin-top: -20px;
+	margin-bottom: 10px;
+}
+
 .post-icon:hover {
 	color: red;
 }
@@ -204,6 +211,7 @@ button {
 	font-size: 25px;
 	margin: 15px;
 	cursor: pointer;
+
 }
 
 .trash-icon {
@@ -253,6 +261,12 @@ button {
 	
 }
 
+.not-found {
+	margin: 0 auto;
+	color: red;
+	text-align: center;
+	margin-top: 100px;
+}
 
 
 

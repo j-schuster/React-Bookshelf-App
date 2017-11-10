@@ -13,10 +13,10 @@ class App extends Component {
     return (  
       <Switch>
          <Route exact path="/" render={() => (<MainPage/>)}/>
-         <Route exact path="/:category" render={() => (<Post/>)}/>      
-         <Route exact path="/posts/:id" render={() => (<PostInfo/>)}/> 
          <Route exact path="/new/post" render={() => (<AddPost/>)}/> 
-         <Route exact path="*" render={() => (<NotFound/>)}/>     
+         <Route exact path="/:category" render={() => (<Post/>)}/>      
+         <Route exact path="/:category/:id" render={() => (<PostInfo/>)}/> 
+         <Route path="*" render={() => (<NotFound/>)}/>     
       </Switch>              
     );
   }

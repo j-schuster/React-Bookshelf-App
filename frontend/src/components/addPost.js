@@ -2,32 +2,27 @@ import React from 'react'
 import { addPost } from '../actions/postActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-
+import Chat from 'react-icons/lib/md/chat'
 
 class AddPost extends React.Component {
 
 	constructor(props){
 		super(props);
 		this.state = {	
-		 	 postTitle: '',
-			  postBody: '',
-		    postAuthor: '',
-		  postCategory: '',
-		      redirect: false,
-		        linkId: '',
-		        value: 'react'
+	 	 postTitle: '',
+		  postBody: '',
+	    postAuthor: '',
+	        linkId: '',
+	      redirect: false,
+	  postCategory: 'react',
 		}
 	}
 
-
 	handleChange = (event) => {
-		this.setState({		
-			[event.target.name]: event.target.value					
-		})
+		this.setState({[event.target.name]: event.target.value})
 	}
 
 	handleSubmit = e => {
-
 		e.preventDefault()
 
 		let uniqueId = () =>  Math.random().toString(36).substr(2, 16)
@@ -51,14 +46,14 @@ class AddPost extends React.Component {
 
 	
 	render() {
-		const { redirect, linkId } = this.state
+		const { redirect, linkId, postCategory } = this.state
 
 		if (redirect) {
-       		return <Redirect to={`/posts/${linkId}`}/>
+       		return <Redirect to={`/${postCategory}/${linkId}`}/>
      	}
 		return(
 		<div className="add-post">
-			<div className="navbar"><h1>Readable</h1></div>
+			<div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
 			   <form onSubmit={this.handleSubmit}>	
 				  <div className="form">	
 				     <h1>Add New Post</h1>			
@@ -83,7 +78,7 @@ class AddPost extends React.Component {
 					    		  onChange={this.handleChange}
 					    		  defaultValue="react">
 					      <option value="select" disabled>Select category...</option>		
-					   	  <option value="react" >React</option>
+					   	  <option value="react">React</option>
 					   	  <option value="redux">Redux</option>
 					   	  <option value="udacity">Udacity</option>
 					    </select>				    

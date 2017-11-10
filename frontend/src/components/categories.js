@@ -11,20 +11,19 @@ componentDidMount(){
 	}
 	
 render() {
-	
 	const items = this.props.categories
 	
 	return(
 		<div>
 			<div className="list-group categories">
-				<a className="list-group-item active">Categories</a>
-				{items.map((item) => 
-				<Link to={`/${item.name}`} key={item.name}>
-					<p className="list-group-item" >{item.name}</p>
-				</Link>
-				)}
-  			</div>
-		</div>
+				<a className="list-group-item">Categories</a>
+					{items.map((item) => 
+					<Link to={`/${item.name}`} key={item.name}>
+						<p className="list-group-item" >{item.name}</p>
+					</Link>
+					)}
+  				</div>
+			</div>
 		);	
 	}
 } 

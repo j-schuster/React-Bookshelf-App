@@ -16,8 +16,7 @@ class MainPage extends React.Component {
 			
 		}
 	}
-
-		
+	
 	componentDidMount = () => {
 		this.props.allPosts()
 	}
@@ -34,7 +33,6 @@ class MainPage extends React.Component {
 
 
 render() {	
-
 	return(
 		<div>
 			<div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>

@@ -30,9 +30,9 @@ export const fetchCategoryPosts = (category) => {
     .then(res => res.json())
     .then(data => data)
 }
-
+///////////////////////////////////////////////////
 export const fetchPostDetails = (id) => {
-	return fetch(`${API}${id}`, { headers }) 
+	return fetch(`${API}/posts/${id}`, { headers }) 
     .then(res => res.json())
     .then(data => data)
 }

@@ -1,35 +1,34 @@
 import { fetchAllPosts,
-  fetchPostDetails,
-   fetchComments,
-    addNewPost,
-    deletePost,
-    addComment,
-    deleteComment,
-    editPost,
-    editComment,
-    votePost,
-    voteComment } from '../utils/api'
+         fetchPostDetails,
+         fetchComments,
+         addNewPost,
+         deletePost,
+         addComment,
+         deleteComment,
+         editPost,
+         editComment,
+         votePost,
+         voteComment } from '../utils/api'
+
+import { RECIEVE_POSTS,
+         RECIEVE_POST_DETAILS,
+         RECIEVE_CATEGORY_POSTS,
+         RECIEVE_COMMENTS,
+         ADD_NEW_POST,
+         DELETE_POST,
+         ADD_NEW_COMMENT,
+         DELETE_COMMENT,
+         EDIT_POST,
+         EDIT_COMMENT,
+         UP_VOTE,
+         DOWN_VOTE,
+         UP_VOTE_PI,
+         DOWN_VOTE_PI,
+         UP_VOTE_COMMENT,
+         DOWN_VOTE_COMMENT,
+         EDIT_POST_IN_POSTS  } from './actionTypes'
 
 
-export const RECIEVE_POSTS = 'RECIEVE_POSTS'
-export const RECIEVE_CATEGORY_POSTS = 'RECIEVE_CATEGORY_POSTS'
-export const RECIEVE_POST_DETAILS = 'RECIEVE_POST_DETAILS'
-export const RECIEVE_COMMENTS = 'RECIEVE_COMMENTS'
-export const ADD_NEW_POST = 'ADD_NEW_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
-export const EDIT_POST = 'EDIT_POST'
-export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const UP_VOTE = 'UP_VOTE'
-export const DOWN_VOTE = 'DOWN_VOTE'
-export const UP_VOTE_PI ='UP_VOTE_PI'
-export const DOWN_VOTE_PI = 'DOWN_VOTE_PI'
-export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
-export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT'
-
-
-//change allPosts to posts
 export const recieveAllPosts = (posts, postId) => ({
 	type: RECIEVE_POSTS,
 	posts
@@ -60,12 +59,6 @@ export const getAllPosts = () => dispatch => {
     })
   }
 
-/*export const getCategoryPosts = (category) => dispatch => {
-  fetchCategoryPosts(category)
-  .then(data => dispatch(recieveCategoryPosts(data)))
-}*/
-
-// posts POST
 export const addPost = (post) => dispatch => {
   addNewPost(post)
   .then(NewPost => {
@@ -76,7 +69,6 @@ export const addPost = (post) => dispatch => {
   })
 }
 
-// COMMENTS
 export const addNewComment = (comment) => dispatch => {
   addComment(comment)
   .then(newComment => dispatch({
@@ -85,7 +77,6 @@ export const addNewComment = (comment) => dispatch => {
   }))
 }
 
-// delete comments 
 export const removeComment = (id) => dispatch => {
   deleteComment(id)
   .then(() => {
@@ -131,6 +122,17 @@ export const modifyPost = (id, post) => dispatch => {
   .then(() => {
     dispatch({
       type: EDIT_POST,
+      id,
+      post
+    })
+  })
+}
+
+export const modifyPostInPosts = (id, post) => dispatch => {
+  editPost(id, post)
+  .then(() => {
+    dispatch({
+      type: EDIT_POST_IN_POSTS,
       id,
       post
     })
@@ -214,4 +216,3 @@ export const commentDnVote = (id, action) => dispatch => {
     })
   })
 }
-

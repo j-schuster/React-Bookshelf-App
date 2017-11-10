@@ -10,6 +10,7 @@ import EditIcon from 'react-icons/lib/fa/edit'
 import AddComIcon from 'react-icons/lib/md/control-point'
 import Chat from 'react-icons/lib/md/chat'
 import Spinner from 'react-spinner-material'
+import NotFound from './notFound'
 import { upVotePI, downVotePI, commentUpVote ,commentDnVote} from '../actions/postActions'
 
 import { getPostDetails,
@@ -18,8 +19,6 @@ import { getPostDetails,
          removeComment, 
          modifyPost,
          modifyComment } from '../actions/postActions'
-
-
 
 class PostInfo extends React.Component {
 
@@ -43,17 +42,16 @@ class PostInfo extends React.Component {
   }
 
 	componentDidMount(){
-		const id = window.location.pathname
+		const path = window.location.pathname
+    const id = path.substr(path.lastIndexOf('/') + 1)
+
     this.props.loadPostInfo(id) 
-    setTimeout(function() { 
-      this.setState({ loading: false })
-     }.bind(this), 500);
+    setTimeout(function() {this.setState({ loading: false })}.bind(this), 500)
 	}
 
   removePost = (id) => {
     this.props.deletePost(id)
     this.setState({ redirect: true })
-
   }
 
   handleModal = (name, body, author, id) => { 
@@ -62,7 +60,6 @@ class PostInfo extends React.Component {
     this.setState({ commentBody: body })
     this.setState({ commentAuthor: author })
   }
-
 
   submitComment = (id, e) => { 
     e.preventDefault()
@@ -108,6 +105,7 @@ class PostInfo extends React.Component {
 
     this.props.editPost(id, post)
     this.setState({ editPostModal: false })
+
   }
 
   handleEditComment = (e) => {
@@ -140,17 +138,18 @@ class PostInfo extends React.Component {
 		const post = this.props.postDetails
 		const comments = this.props.postComments
     const loading = this.state.loading
-    
 	
     if(redirect){
        return <Redirect to='/'/>
+    }else if(!loading && !post[0].title){
+       return <NotFound/>
     }
 		return(
 			<div>
         <Link to='/'>
 			   <div className="navbar"><h1><Chat className="chat"/>Readable</h1></div>
            </Link>
-				    {!loading ? 
+				    {!loading && post[0].title ? 
 					    <div className="list-group posts-main">
   				      {post.map((post) => 
   				       <div key={post.id} className="post">	
@@ -200,7 +199,7 @@ class PostInfo extends React.Component {
                       <div className="comments-section">
                         <AddComIcon className="com-icon" 
                                 onClick={() => this.handleModal('commentModal')}/>
-                                <h6 className="comments-header">COMMENTS</h6>
+                                <h6 className="comments-header">{comments.length} COMMENTS</h6>
                                 <hr/>                 
                       <ReactModal 
                         isOpen={this.state.commentModal}    
